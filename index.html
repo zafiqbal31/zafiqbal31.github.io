@@ -23,8 +23,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* Layout: single ink-on-paper column, slim sticky index, role blocks with the
-   date set as a right-hand rail that folds under the title on small screens. */
+/* Layout: single ink-on-paper column, slim sticky index. Each role carries a
+   scope line (breadth) above achievement bullets (what changed). */
 :root{
   --bg:#f4f6f8; --surface:#ffffff; --ink:#131a23; --muted:#59646f;
   --accent:#1d5a6e; --accent-soft:#e3eef1; --rule:#dde2e8;
@@ -127,7 +127,7 @@ h2{
 .employer span{font-family:var(--body); font-weight:400; color:var(--muted); font-size:.88rem}
 .job{
   display:grid; grid-template-columns:1fr auto; gap:.1rem 1.5rem;
-  align-items:baseline; margin:1.5rem 0 .6rem;
+  align-items:baseline; margin:1.5rem 0 .5rem;
 }
 .job h3{
   font-family:var(--display); font-weight:600; font-size:1rem; margin:0;
@@ -142,16 +142,23 @@ h2{
   .job{grid-template-columns:1fr}
   .job .when{white-space:normal}
 }
+.scope{
+  margin:0 0 .6rem; font-size:.88rem; color:var(--muted);
+  padding-left:.7rem; border-left:2px solid var(--rule);
+}
+.scope b{color:var(--ink); font-weight:600}
 ul{margin:0; padding-left:1.1rem}
 li{margin-bottom:.45rem; min-width:0}
 li::marker{color:var(--accent)}
+li b{font-weight:600}
 
 /* ---- skills ---- */
-.skills{display:grid; gap:1.25rem}
-.skills h3{
-  font-family:var(--display); font-weight:600; font-size:.9rem; margin:0 0 .3rem;
-}
+.skills{display:grid; gap:.8rem}
 .skills p{margin:0; color:var(--muted); font-size:.93rem}
+.skills b{
+  color:var(--ink); font-family:var(--display); font-weight:600;
+  font-size:.9rem;
+}
 
 /* ---- closing rows ---- */
 .rows{display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
@@ -171,36 +178,46 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
 }
 .download:hover,.download:focus-visible{filter:brightness(1.12)}
 
+/* Target: two A4 pages. Body stays at 10pt -- readable -- and the length comes
+   out of spacing plus the pre-2015 detail that a two-page CV drops anyway. */
 @media print{
-  @page{margin:14mm 14mm 12mm}
+  @page{margin:13mm 13mm 11mm}
   :root{
     --bg:#fff; --surface:#fff; --ink:#000; --muted:#333;
     --accent:#000; --accent-soft:#fff; --rule:#999;
   }
-  body{font-size:10.5pt; line-height:1.45}
-  body::before,.index,.download{display:none!important}
+  body{font-size:10pt; line-height:1.33}
+  body::before,.index,.download,.figures,footer,.print-hide{display:none!important}
   .wrap{max-width:none; padding:0}
   .masthead,section{border:0}
-  .masthead .wrap{padding-block:0 .6rem}
-  section{padding-block:.9rem 0}
-  h1{font-size:19pt}
-  .role{font-size:11pt; margin-bottom:.5rem}
+  .masthead .wrap{padding-block:0 .35rem}
+  section{padding-block:.55rem 0}
+  h1{font-size:17pt; margin-bottom:.15rem}
+  .role{font-size:10.5pt; margin-bottom:.3rem}
+  .meta{margin-bottom:.3rem; gap:.1rem .8rem}
   .permit{background:none; padding:0; font-weight:600}
   h2{
-    font-size:9pt; margin-bottom:.5rem; padding-bottom:.15rem;
+    font-size:8.5pt; margin-bottom:.35rem; padding-bottom:.1rem;
     border-bottom:1px solid #999;
   }
-  .figures{display:none}          /* the same numbers are in the bullets */
-  .employer{font-size:11pt; margin-top:.8rem; border-bottom-width:1px}
-  .job{margin:.5rem 0 .25rem; break-after:avoid}
-  .job h3{font-size:10.5pt}
-  .employer,h2{break-after:avoid}
-  .job,li,.skills>div,.rows>div{break-inside:avoid}
-  ul{margin-bottom:.3rem}
-  li{margin-bottom:.15rem}
-  .skills,.rows{gap:.55rem}
-  .lede{font-size:10.5pt; max-width:none}
-  footer{display:none}
+  .lede{font-size:10pt; max-width:none}
+  .employer{font-size:10.5pt; margin-top:.55rem; padding-bottom:.15rem;
+            border-bottom-width:1px}
+  .job{margin:.35rem 0 .1rem}
+  .job h3{font-size:10pt}
+  .employer,h2,.job{break-after:avoid}
+  li,.skills>div,.rows>div{break-inside:avoid}
+  ul{margin-bottom:.2rem; padding-left:.95rem}
+  li{margin-bottom:.08rem}
+  .scope{
+    font-size:9.5pt; margin-bottom:.22rem; padding-left:.5rem;
+    border-left-width:1px; break-after:avoid;
+  }
+  .skills{display:block}
+  .skills p{margin-bottom:.2rem; font-size:10pt}
+  .skills b{font-size:10pt}
+  .rows{gap:.4rem 1rem}
+  .rows p{margin-bottom:0}
   a{text-decoration:none; color:#000}
 }
 </style>
@@ -220,7 +237,7 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
   },
   "worksFor": { "@type": "Organization", "name": "UBS" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Mumbai" },
-  "knowsLanguage": ["English", "Hindi"]
+  "knowsLanguage": ["English"]
 }
 </script>
 </head>
@@ -256,12 +273,12 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
     <div><dt>98%</dt><dd>SLA adherence, UK &amp; Poland immigration</dd></div>
     <div><dt>1,000+</dt><dd>new hires onboarded annually</dd></div>
     <div><dt>13</dt><dd>APAC countries served</dd></div>
-    <div><dt>1,500+</dt><dd>external staff administered annually</dd></div>
+    <div><dt>1,500+</dt><dd>external contractors onboarded annually</dd></div>
   </dl>
 
   <section id="summary">
     <h2>Summary</h2>
-    <p class="lede">Global HR operations and service delivery leader with 17+ years across HR Shared Services, HR transformation, immigration services and employee lifecycle management in Europe, APAC, the US and the Middle East. Currently leads immigration service delivery for the UK and Poland at UBS; previously ran UK onboarding for over a thousand new hires a year and external workforce operations across thirteen APAC markets. Builds operational governance, standardises process across markets and develops cross-cultural teams.</p>
+    <p class="lede">HR operations leader with 17+ years across HR Shared Services, immigration services and employee lifecycle management in Europe, APAC, the US and the Middle East. Runs UK and Poland immigration service delivery at 98% SLA adherence. Previously onboarded 1,000+ new hires a year with a team of 5&ndash;8, and onboarded 1,500+ external contractors across 13 APAC countries. Contributed to the design of a global HR service delivery model.</p>
   </section>
 
   <section id="experience">
@@ -274,12 +291,11 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <span class="when">Jun 2026 &ndash; Present</span>
       <span class="where">Krak&oacute;w, Poland</span>
     </div>
+    <p class="scope"><b>Scope:</b> UK and Poland immigration service delivery &middot; team of 5&ndash;8 &middot; complex case portfolios, regulatory compliance, operational risk and vendor governance</p>
     <ul>
-      <li>Leads immigration service delivery across the UK and Poland, owning complex case portfolios, operational risk, regulatory compliance and employee experience.</li>
-      <li>Strengthened operational governance and ran continuous improvement initiatives, achieving 98% SLA adherence and reducing case escalations by 15%.</li>
-      <li>Streamlined immigration vendor management, improving vendor responsiveness and reducing manual follow-ups by 15%.</li>
-      <li>Identified gaps in vendor utilisation and proposed process improvements to meet contractual volume commitments and avoid unnecessary cost.</li>
-      <li>Partners with HR, Payroll, Global Mobility and cross-functional stakeholders to implement regulatory change and develop team capability.</li>
+      <li><b>98% SLA adherence and case escalations down 15%</b>, after rebuilding the governance and continuous-improvement model.</li>
+      <li><b>Manual vendor follow-ups down 15%</b> &mdash; redesigned immigration vendor management and surfaced unused contracted capacity against volume commitments, avoiding unnecessary cost.</li>
+      <li>Regulatory change partner to HR, Payroll and Global Mobility across both jurisdictions, accountable for operational risk and employee experience.</li>
     </ul>
 
     <div class="job">
@@ -287,11 +303,12 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <span class="when">Mar 2022 &ndash; Jun 2026</span>
       <span class="where">Krak&oacute;w, Poland</span>
     </div>
+    <p class="scope"><b>Scope:</b> UK regional HR services and end-to-end onboarding &middot; team of 5&ndash;8 &middot; 1,000+ new hires annually</p>
     <ul>
-      <li>Led UK regional HR services and end-to-end onboarding operations, onboarding 1,000+ new hires annually.</li>
-      <li>Designed and enhanced onboarding programmes aligned to business requirements, maintaining 96% SLA adherence for employment contract generation.</li>
-      <li>Achieved an 80% CSAT score through employee feedback and service improvements, and cut manual administrative effort by 25% through workflow and tooling changes.</li>
-      <li>Owned regional knowledge management and established KPI reporting for senior leadership, while driving team development and performance management.</li>
+      <li><b>1,000+ new hires onboarded each year with a team of 5&ndash;8</b>, at 96% SLA adherence for employment contract generation.</li>
+      <li><b>80% CSAT</b>, through a feedback-led redesign of the onboarding experience.</li>
+      <li><b>Manual administrative effort down 25%</b>, by reworking onboarding workflows and tooling.</li>
+      <li>Built KPI reporting to senior leadership and owned regional knowledge management for HR policy and process.</li>
     </ul>
 
     <div class="job">
@@ -299,11 +316,11 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <span class="when">Jun 2020 &ndash; Feb 2022</span>
       <span class="where">Pune, India</span>
     </div>
+    <p class="scope"><b>Scope:</b> external workforce lifecycle across 13 APAC countries &middot; 1,500+ external contractors annually &middot; onboarding, workforce administration and offboarding</p>
     <ul>
-      <li>Led end-to-end external workforce lifecycle operations across 13 APAC countries &mdash; onboarding, workforce administration and offboarding for 1,500+ external staff annually.</li>
-      <li>Contributed to the design of a global HR service delivery model, aligning regional operations with organisational objectives.</li>
-      <li>Standardised regional workflows, reducing process variation by 30% and improving consistency across APAC markets.</li>
-      <li>Drove HR technology adoption through process design, system testing, training and implementation support.</li>
+      <li><b>Process variation down 30% across 13 markets</b>, by standardising regional workflows and operational practice.</li>
+      <li>Contributed to the design and development of a <b>global HR service delivery model</b>, aligning regional operations to enterprise objectives.</li>
+      <li>Led regional HR technology adoption &mdash; process design, system testing, training and change management.</li>
     </ul>
 
     <div class="job">
@@ -311,11 +328,10 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <span class="when">Jun 2017 &ndash; May 2020</span>
       <span class="where">Pune, India</span>
     </div>
+    <p class="scope"><b>Scope:</b> three HR service delivery functions &mdash; vetting, external staff onboarding and document management &middot; internal and external workforce populations</p>
     <ul>
-      <li>Led three HR service delivery functions &mdash; vetting, external staff onboarding and document management &mdash; supporting internal and external workforce populations.</li>
-      <li>Held dual responsibility as Regional HR Vetting Lead, representing APAC in regional and global HR forums.</li>
-      <li>Managed external vetting service providers, owning vendor performance, service quality, compliance and issue resolution.</li>
-      <li>Partnered with global and regional stakeholders to standardise HR processes against organisational and regulatory requirements.</li>
+      <li><b>Regional HR Vetting Lead for APAC</b>, representing the region in regional and global HR forums.</li>
+      <li>Owned external vetting provider performance, service quality, regulatory compliance and issue resolution.</li>
     </ul>
 
     <p class="employer">ATKINS <span>&mdash; Bengaluru, India</span></p>
@@ -323,9 +339,10 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <h3>Lead &mdash; HR Associate, Middle East</h3>
       <span class="when">Oct 2015 &ndash; Nov 2016</span>
     </div>
+    <p class="scope"><b>Scope:</b> HR Shared Services for the Middle East region &middot; service delivery and workforce planning</p>
     <ul>
-      <li>Led HR Shared Services operations for the Middle East region, aligning service delivery and workforce planning with regional business objectives.</li>
-      <li>Managed HR process offshoring, transition, documentation and re-engineering, and established audit mechanisms, internal controls and performance metrics over transitioned processes.</li>
+      <li>Managed HR process offshoring, transition, documentation and re-engineering into the shared services centre.</li>
+      <li>Established audit mechanisms, internal controls and performance metrics over transitioned processes.</li>
     </ul>
 
     <p class="employer">Oracle <span>&mdash; Bengaluru, India</span></p>
@@ -334,8 +351,8 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <span class="when">Jul 2013 &ndash; Sep 2015</span>
     </div>
     <ul>
-      <li>Led revenue accounting operations, owning team performance, transaction accuracy, operational KPIs and resource planning.</li>
-      <li>Managed SOX compliance, internal control reviews and external audit support, alongside process improvements to transaction turnaround and accuracy.</li>
+      <li>Led revenue accounting operations &mdash; team performance, transaction accuracy, operational KPIs and resource planning.</li>
+      <li>Owned SOX compliance, internal control reviews and external audit support.</li>
     </ul>
 
     <p class="employer">Tesco <span>&mdash; Bengaluru, India &middot; Jun 2005 to Jul 2013</span></p>
@@ -343,9 +360,9 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <h3>Team Lead &mdash; HR Shared Services, UK then US</h3>
       <span class="when">Aug 2009 &ndash; Jul 2013</span>
     </div>
+    <p class="scope"><b>Scope:</b> UK and US HR Shared Services &middot; employee administration, benefits, payroll, recruitment and employee relations</p>
     <ul>
-      <li>Led UK and US HR Shared Services operations covering employee administration, benefits, payroll, recruitment and employee relations.</li>
-      <li>Managed a 13-member UK payroll team and completed payroll knowledge transfer and integration into HR Shared Services.</li>
+      <li>Managed a <b>13-member UK payroll team</b> and completed payroll knowledge transfer and integration into HR Shared Services.</li>
       <li>Oversaw HR policy interpretation, workforce planning, employee records, background verification and internal audit.</li>
     </ul>
     <div class="job">
@@ -357,22 +374,9 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills">
-      <div>
-        <h3>HR operations &amp; service delivery</h3>
-        <p>HR Shared Services, Global Business Services, HR service delivery models, employee lifecycle management, onboarding and vetting, payroll operations, immigration and global mobility services, knowledge management, employee experience.</p>
-      </div>
-      <div>
-        <h3>Transformation &amp; governance</h3>
-        <p>HR transformation, process transition and offshoring, process standardisation, SLA management, KPI reporting, risk and regulatory compliance, internal controls and audit, cost optimisation.</p>
-      </div>
-      <div>
-        <h3>Leadership &amp; stakeholders</h3>
-        <p>People leadership, team development, performance management, cross-cultural and multi-site team leadership, strategic stakeholder management, change management, vendor management.</p>
-      </div>
-      <div>
-        <h3>Systems</h3>
-        <p>Workday, Oracle HCM, ServiceNow, BrassRing, Microsoft Excel, Power BI, Tableau, SharePoint, Microsoft 365, Microsoft Teams.</p>
-      </div>
+      <p><b>Specialisms</b><br>HR Shared Services and Global Business Services delivery, employee lifecycle management, onboarding and vetting, payroll operations, immigration and global mobility services, process transition and offshoring, vendor and SLA governance, risk and regulatory compliance, internal controls and audit.</p>
+      <p><b>Systems operated</b><br>Oracle HCM, ServiceNow, BrassRing, Power BI, Tableau, SharePoint, Microsoft 365.</p>
+      <p><b>Working knowledge</b><br>Workday.</p>
     </div>
   </section>
 
@@ -383,7 +387,6 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
         <h3>Education</h3>
         <p><strong>Bachelor of Arts</strong></p>
         <p>University of Mumbai, Maharashtra College &middot; 2000&ndash;2005</p>
-        <p>Sociology, Political Science, English Literature, Psychology</p>
       </div>
       <div>
         <h3>Certifications</h3>
@@ -393,7 +396,6 @@ a:focus-visible,.index a:focus-visible{outline:2px solid var(--accent); outline-
       <div>
         <h3>Languages</h3>
         <p><strong>English</strong> &mdash; full professional proficiency</p>
-        <p><strong>Hindi</strong> &mdash; native or bilingual proficiency</p>
       </div>
       <div>
         <h3>Markets served</h3>
